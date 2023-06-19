@@ -9,23 +9,15 @@ class Solution {
             
             map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
             
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) - 1);
+            
+            if (map.get(s.charAt(i)) == 0) map.remove(s.charAt(i));
+            
+            if (map.containsKey(t.charAt(i)) && map.get(t.charAt(i)) == 0) map.remove(t.charAt(i));
+             
         }
         
-        for (int i = 0; i <= t.length() - 1; i++) {
-            
-            if (!map.containsKey(t.charAt(i))) return false;
-            
-            if (map.containsKey(t.charAt(i))) {
-                
-                if (map.get(t.charAt(i)) <= 1) map.remove(t.charAt(i));
-                
-                else map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) - 1);
-                
-            }
-            
-        }
-        
-        return true;
+        return map.isEmpty();
         
     }
 }

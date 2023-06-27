@@ -9,7 +9,7 @@ class Solution {
         
         while (l <= r) {
             
-            int mid = l + (r - l) / 2;
+            int mid = l + (r - l) / 3;
             
             if (Math.pow(3, mid) == n) {
                 return true;

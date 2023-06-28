@@ -15,7 +15,7 @@ class Solution {
                 res.add("Buzz");
             }
             else {
-                res.add(i + "");
+                res.add(Integer.toString(i));
             }
             
         }

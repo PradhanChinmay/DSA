@@ -23,16 +23,15 @@ class Solution {
     
     public void rev_from_k(int arr[], int i, int j)
     {
-        if(i>j)
-            return;
-        else
-        {
-            int temp=arr[i];
-            arr[i]=arr[j];
-            arr[j]=temp;
+        while (i < j) {
+            
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            
             i++;
             j--;
-            rev_from_k(arr,i,j);
+            
         }
     }
     

@@ -3,26 +3,37 @@ class Solution {
         
         k = k % nums.length;
         
-        reverse(nums, 0, nums.length - 1);
-        reverse(nums, 0, k - 1);
-        reverse(nums, k, nums.length - 1);
+        for(int i=0;i<nums.length/2;i++)
+        {
+            int temp=nums[i];
+            nums[i]=nums[nums.length-i-1];
+            nums[nums.length-i-1]=temp;
+        }
+        
+        for(int i=0;i<k/2;i++)
+        {
+            int temp=nums[i];
+            nums[i]=nums[k-i-1];
+            nums[k-i-1]=temp;
+        }
+        
+        rev_from_k(nums,k,nums.length-1);
         
     }
     
-    public void reverse (int[] arr, int i, int j) {
-        
-        int l = i, r = j;
-        
-        while (l < r) {
-            
-            int temp = arr[l];
-            arr[l] = arr[r];
-            arr[r] = temp;
-            
-            l++;
-            r--;
-            
+    public void rev_from_k(int arr[], int i, int j)
+    {
+        if(i>j)
+            return;
+        else
+        {
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
+            j--;
+            rev_from_k(arr,i,j);
         }
-        
     }
+    
 }

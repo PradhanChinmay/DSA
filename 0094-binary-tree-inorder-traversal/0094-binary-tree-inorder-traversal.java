@@ -24,7 +24,7 @@ class Solution {
         
     }
     
-    private static void helper (TreeNode root, List<Integer> ans) {
+    private static void helper(TreeNode root, List<Integer> ans) {
         
         if (root == null) return;
         

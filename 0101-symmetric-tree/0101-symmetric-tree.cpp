@@ -13,20 +13,21 @@ class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
         
-        return helper (root->left, root->right);
+        if(root==NULL)
+            return true;
+        return symmetry(root->left, root->right);
         
     }
     
-    bool helper (TreeNode* left, TreeNode* right) {
-        
+    bool symmetry(TreeNode* left, TreeNode* right)
+    {
         if (left == NULL && right == NULL) return true;
         
-        if (left == NULL && right != NULL) return false;
-        if (left != NULL && right == NULL) return false;
-        
-        if (left->val != right->val) return false;
-        
-        return helper (left->left, right->right) && helper(left->right, right->left);
-        
-    }
+        if(left==NULL && right!=NULL)
+            return false;
+        if(left!=NULL && right==NULL)
+            return false;
+        return left->val==right->val && symmetry(left->left,right->right) && symmetry(left->right, right->left);
+    }
+    
 };

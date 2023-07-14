@@ -1,19 +1,26 @@
 class Solution {
-    public boolean checkRecord(String s) {
+    public boolean checkRecord(String s){
+        int ab=0, l=0;
         
-        int c = 0;
-        
-        if (s.contains("LLL")) return false;
-        
-        for (int i = 0; i <= s.length() - 1; i++) {
-            
-            if (s.charAt(i) == 'A') c++;
-            
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)=='P')
+            {
+                l=0;
+            }
+            else if(s.charAt(i)=='A')
+            {
+                ab++;
+                l=0;
+                if(ab>=2)
+                    return false;
+            }
+            else if(s.charAt(i)=='L')
+            {
+                l++;
+                if(l>=3)
+                    return false;
+            }
         }
-        
-        if (c >= 2) return false;
-        
-        return true;
-        
-    }
+return true;}
 }

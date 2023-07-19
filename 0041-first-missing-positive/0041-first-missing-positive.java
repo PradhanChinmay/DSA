@@ -12,8 +12,6 @@ class Solution {
             
         }
         
-        System.out.println(hs);
-        System.out.println(max);
         
         int i = 1;
         while (i <= max) {

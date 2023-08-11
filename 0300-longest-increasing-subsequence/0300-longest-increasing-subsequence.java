@@ -1,30 +1,34 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
         
-        int[][] dp = new int[nums.length][nums.length + 1];
+        int[] dp = new int[nums.length];
         
-        for (int[] row : dp) Arrays.fill(row, -1);
+        dp[0] = 1;
+        int ans = 1;
         
-        return helper(nums, 0, -1, dp);
-        
-    }
-    
-    
-    static int helper (int[] nums, int ind, int prev, int[][] dp) {
-        
-        if (ind >= nums.length) return 0;
-        
-        if (dp[ind][prev + 1] != -1) return dp[ind][prev + 1]; 
-        
-        int len = 0 + helper (nums, ind + 1, prev, dp);
-        
-        if (prev == -1 || nums[ind] > nums[prev]) {
+        for (int i = 1; i < dp.length; i++) {
             
-            len = Math.max(len, 1 + helper (nums, ind + 1, ind, dp));
+            int max = 0;
+            
+            for (int j = 0; j < i; j++) {
+                
+                if (nums[j] < nums[i]) {
+                    if(dp[j] > max) {
+                        
+                        max = dp[j];
+                        
+                    }
+                }
+                
+            }
+            
+            dp[i] = max + 1;
+            
+            if (dp[i] > ans) ans = dp[i];
             
         }
         
-        return dp[ind][prev + 1] = len;
+        return ans;
         
     }
 }

@@ -51,11 +51,7 @@ class Solution
     //Function to return max value that can be put in knapsack of capacity W.
     static int knapSack(int W, int wt[], int val[], int n) 
     { 
-        int[][] dp = new int[n][W + 1];
-        
-        for (int[] row : dp) Arrays.fill(row, -1);
-        
-        return solve_mem(wt, val, n - 1, W, dp);
+        return solve_tab(wt, val, n, W);
     } 
     
     // static int solve (int[] wt, int[] val, int ind, int capacity) {
@@ -80,27 +76,63 @@ class Solution
         
     // }
     
-    static int solve_mem (int[] wt, int[] val, int ind, int capacity, int[][] dp) {
+    // static int solve_mem (int[] wt, int[] val, int ind, int capacity, int[][] dp) {
         
-        if (ind == 0) {
-            if (wt[0] <= capacity) {
-                return val[0];
+    //     if (ind == 0) {
+    //         if (wt[0] <= capacity) {
+    //             return val[0];
+    //         }
+    //         else {
+    //             return 0;
+    //         }
+    //     }
+        
+    //     if (dp[ind][capacity] != -1) return dp[ind][capacity];
+        
+    //     int include = 0;
+    //     if (wt[ind] <= capacity) {
+    //         include = val[ind] + solve_mem(wt, val, ind - 1, capacity-wt[ind], dp);
+    //     }
+        
+    //     int exclude = 0 + solve_mem(wt, val, ind - 1, capacity, dp);
+        
+    //     return dp[ind][capacity] = Math.max(include, exclude);
+        
+    // }
+    
+    static int solve_tab(int[] wt, int[] val, int n, int cap) {
+        
+        int[][] dp = new int[n][cap + 1];
+        
+        for (int w = wt[0]; w <= cap; w++) {
+            
+            if (wt[0] <= cap) {
+                dp[0][w] = val[0];
             }
             else {
-                return 0;
+                dp[0][w] = 0;
             }
+            
         }
         
-        if (dp[ind][capacity] != -1) return dp[ind][capacity];
-        
-        int include = 0;
-        if (wt[ind] <= capacity) {
-            include = val[ind] + solve_mem(wt, val, ind - 1, capacity-wt[ind], dp);
+        for (int i = 1; i < n; i++) {
+            
+            for (int w = 0; w <= cap; w++) {
+                
+                int include = 0;
+                if (wt[i] <= w) {
+                    include = val[i] + dp[i - 1][w - wt[i]];
+                }
+                
+                int exclude = 0 + dp[i - 1][w];
+                
+                dp[i][w] = Math.max(include, exclude);
+                
+            }
+            
         }
         
-        int exclude = 0 + solve_mem(wt, val, ind - 1, capacity, dp);
-        
-        return dp[ind][capacity] = Math.max(include, exclude);
+        return dp[n - 1][cap];
         
     }
 }
